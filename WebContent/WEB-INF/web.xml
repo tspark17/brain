@@ -11,9 +11,10 @@
     <servlet-name>Convert</servlet-name>
     <servlet-class>test2.Convert</servlet-class>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>Convert</servlet-name>
-    <url-pattern>/Convert</url-pattern>
+    <url-pattern>/convert</url-pattern>
   </servlet-mapping>
   
   <error-page>

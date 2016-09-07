@@ -6,7 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>404 Error</title>
 </head>
-<body>
 
+<body>
+Not found page.<br>
+404 Error
 </body>
 </html>

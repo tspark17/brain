@@ -3,11 +3,12 @@
 <%!final int FONT_SIZE = 10;%>
 <%!final int WEST_R_WIDTH = 297; %>
 <%!final int WEST_R_HEIGHT = 200; %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <head>
-
 <title>MRI</title>
-
+<link rel="shortcut icon" type="image/x-icon" href="logo_icon.ico"/>
 <link rel="stylesheet"
    href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="jquery-filestyle.min.css">
@@ -62,7 +63,7 @@ table td {
 #geometry_editor {
    border: 1px solid #848484;
    width: <%=EAST_WIDTH%>px;
-   height: 400px;
+   height: 430px;
    font-size: <%=FONT_SIZE%>pt;
 }
 
@@ -145,7 +146,6 @@ table td {
 
 <!-- Path: System.out.println(getServletContext().getRealPath("/")+""); -->
 
-
 <!-- Top Logo -->
 <div class="ui-layout-north">
 
@@ -154,12 +154,10 @@ table td {
       <img src="logo.PNG">
 
    </p>
-
 </div>
 
 <!-- RIGHT OR EAST   -->
 <div class="ui-layout-center">
-   
    <div id="geometry_editor">
       <div id="right1">
       <b><font size="3">&nbsp;&nbsp;Geometry Editor</font></b>
@@ -170,7 +168,7 @@ table td {
                <option value="v_Coronal">Coronal</option>
          </select>
 	  </div>
-      <div id="right2" ><p id="status">File API & FileReader API not supported</p></div>
+      <div id="right2" ><br><br><p id="status">File API & FileReader API not supported</p></div>
       <div id="right3">right3</div>
       <div id="right4">right4</div>
    </div>
@@ -183,11 +181,11 @@ table td {
                <td width="90"></td>
                <td>
                <button type="submit" id="btn_generateSequence" class="btn btn-default"  
-               style="width: 100%; font-weight: bold;">Run Simulator</button>
+               style="width: 120%; font-weight: bold;"><font size="4">Run</font></button>
 			   </td>
                <td width="90"></td>
                <td>
-               <button type="submit" id="btn_exit" class="btn btn-default" style="width: 100%;">Exit</button>
+               <button type="submit" id="btn_exit" class="btn btn-default" onclick="window.close()" style="width: 100%;">Exit</button>
                </td>
             </tr>
          </table>
@@ -235,18 +233,20 @@ table td {
    
    <div id="system">
         <b><font size="3">Experimental System Setup </font></b><br> <br>
-   <form action="convert.do" method="post" enctype="multipart/form-data">
-      <input type="file" class="jfilestyle" onchange="this.form.submit()" id="geo_load" data-theme="blue"
-         accept=".bin" data-buttonText="Geometry file">
-      <input type="file" class="jfilestyle" onchange="this.form.submit()" id="tissue_load" data-theme="blue"
-         accept=".bin"  data-buttonText="Tissue file"><br>
-      <input type="file" class="jfilestyle" onchange="this.form.submit()" id="b0_load" data-theme="blue"
-         accept=".bin" data-disabled="true"
-         data-buttonText="B0 file &nbsp;&nbsp; "><br>
-      <input type="file" class="jfilestyle" onchange="this.form.submit()" id="b1p_load" data-theme="blue"
-         accept=".bin" data-disabled="true" data-buttonText="B1+ file &nbsp;&nbsp;"><br>
-    </form>
-      <br>
+ <form name="convertForm" action="convert" method="post" enctype="multipart/form-data">
+      <input name="geo_load" type="file" class="jfilestyle" id="geo_load" onchange="this.form.submit()" 
+      data-theme="blue" accept=".bin" data-buttonText="Geometry file" value="geo_load">
+      <input name="tissue_load" type="file" class="jfilestyle" id="tissue_load" onchange="this.form.submit()"
+      data-theme="blue" accept=".bin" data-buttonText="Tissue file" value="tissue_load"><br>
+      <input name="b0_load" type="file" class="jfilestyle" id="b0_load" onchange="this.form.submit()" 
+      data-theme="blue" accept=".bin" data-disabled="true" data-buttonText="B0 file &nbsp;&nbsp; " value="b0_load"><br>
+      <input name="b1p_load"type="file" class="jfilestyle" id="b1p_load" onchange="this.form.submit()"  
+      data-theme="blue" accept=".bin" data-disabled="true" data-buttonText="B1+ file &nbsp;&nbsp;" value="b1p_load">
+    <!--    <input type="file" class="jfilestyle" id="b1m_load" data-theme="blue"
+         accept=".bin" data-disabled="true" data-buttonText="B1- file &nbsp;&nbsp;" value="b1m_load"><br>
+         -->
+ </form>
+       
       <tr>
          <td>Field Strength (Tesla)</td>
          <td><input type="text" style="width: 100px;"readonly"></td>
@@ -284,14 +284,14 @@ table td {
          <table border="0" width="400" height="50" cellpadding="0"
             cellspacing="0" align="middle" valign="middle">
             <tr>
-               <td><nobr>Pulse Sequence</nobr></td>
+               <td><nobr>Pulse Sequence &nbsp;</nobr></td>
                <td><select name="job">
                      <option value="">Gradient echo</option>
                      <option value="SC_0920">SC_0930</option>
                      <option value="SC_0930">SC_0940</option>
                      <option value="SC_0940">SC_0950</option>
                </select></td>
-               <td><nobr>RF Pulse Shape</nobr></td>
+               <td><nobr>RF Pulse Shape &nbsp;</nobr></td>
                <td><select name="job">
                      <option value="">Sinc</option>
                      <option value="SC_0920">SC_0930</option>
