@@ -30,17 +30,15 @@ public class Convert extends HttpServlet{
 		String inputName;
 		for(Part part : req.getParts())  //form-input-file 에 대한 각각의 항목 검사
 		{
-			readFile(part.getInputStream());
+			
+			//readFile(part.getInputStream());  file 내용을 읽는 function
 			if(part.getSize() != 0)  //항목마다 파일이 있는지 검사
 			{
-				//bin 파일 정보
-				System.out.println("inputName:" + part.getName());
-				System.out.println("fileName:" + getFileName(part));
-				System.out.println("fileSize:" + part.getSize());
+				readBinInformation(part); //bin파일 메타데이터 read function
 
 				inputName = part.getName();
 
-				//항목에 따른 파일 변환 함수 call
+				//input항목에 따른 파일 변환 함수 call
 				if(inputName.equals("geo_load"))
 					System.out.println("geo");
 				else if(inputName.equals("tissue_load"))
@@ -52,20 +50,10 @@ public class Convert extends HttpServlet{
 
 		//String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 		//InputStream fileContent = geo_part.getInputStream();
-
-		//System.out.println("part:" + geo_part);
-		//System.out.println("part name:" + geo_part.getName());
-		//System.out.println("part size:" + geo_part.getSize());
-		//System.out.println("part inputStream:" + geo_part.getInputStream());
-		//System.out.println("des:" + des);
-		//System.out.println("fileName:" + fileName);
-		//System.out.println("fileContent:" + fileContent);  
-		//System.out.println("fileName: " + fileName);
-		//System.out.println("read: " + fileContent.read());
 		//log.debug("Convert class - Begin" + test);
 
-		//resp.sendRedirect("/test2/NewFile.jsp");  
-		req.getRequestDispatcher("/test2/NewFile.jsp");
+		resp.sendRedirect("/test2/NewFile.jsp");  //변환 후  main.jsp로 redirect
+		//req.getRequestDispatcher("/test2/NewFile.jsp");
 
 		// log.debug("Convert class - End");
 	}
@@ -94,6 +82,17 @@ public class Convert extends HttpServlet{
 	void readFile(InputStream stream) throws IOException{
 		String file = getStringFromStream(stream);
 		System.out.println(file);
+	}
+	
+	/**
+	 * bin파일 정보 출력한다.
+	 * @param part
+	 */
+	void readBinInformation(Part part){		
+		//bin파일 정보
+		System.out.println("inputFieldName:" + part.getName());
+		System.out.println("fileName:" + getFileName(part));
+		System.out.println("fileSize:" + part.getSize());
 	}
 	
 	/**
